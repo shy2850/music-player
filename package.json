@@ -1,0 +1,41 @@
+{
+  "name": "music-player",
+  "version": "0.1.0",
+  "description": "music-player",
+  "main": "index.js",
+  "scripts": {
+    "build": "f2e build",
+    "start": "f2e start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shy2850/music-player.git"
+  },
+  "keywords": [
+    "music",
+    "player"
+  ],
+  "author": "shy2850",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shy2850/music-player/issues"
+  },
+  "homepage": "https://github.com/shy2850/music-player#readme",
+  "dependencies": {
+    "bulma": "^0.6.1",
+    "immutable": "^3.8.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "requirejs": "^2.3.5"
+  },
+  "devDependencies": {
+    "f2e-middle-typescript": "^0.3.3",
+    "f2e-server": "^2.7.4",
+    "less": "^2.7.3",
+    "typescript": "^2.6.2",
+    "uglify-js": "^3.3.5"
+  }
+}

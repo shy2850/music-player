@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "jsx": "react",
+        "module": "amd",
+        "target": "es2015"
+    },
+    "include": [
+        "src/*.ts",
+        "src/*.tsx",
+        "src/**/*.ts",
+        "src/**/*.tsx"
+    ]
+}
