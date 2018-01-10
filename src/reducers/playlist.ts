@@ -1,5 +1,6 @@
 import y_playlist_str from './playlistdata'
 import { dispatch, getState } from '../store'
+import * as $ from 'wfquery'
 
 export const STORE_KEY = {
     LIST: 'y_playlist',
@@ -27,23 +28,29 @@ export const init = () => dispatch(getState => {
     return n
 })
 
-window['MusicJsonCallback03126507134949308'] = function (res) {
-    console.log(res)
-}
-const jsonp = url => {
-    let script = document.createElement('script')
-    script.onload = function () {
-        document.body.removeChild(script)
-    }
-    script.src = url
-    document.body.appendChild(script)
-}
-
 export const changeSong = (current) => {
     localStorage.setItem(STORE_KEY.CURRENT, current + '')
     localStorage.setItem(STORE_KEY.PROGRESS, '0')
 
     const song = getState().getIn(['list', current]).toJS()
+    $.jsonp('https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg', {
+        g_tk: 5381,
+        loginUin: 0,
+        hostUin: 0,
+        format: 'json',
+        inCharset: 'utf8',
+        outCharset: 'utf-8',
+        notice: 0,
+        platform: 'yqq',
+        needNewCode: 0,
+        cid: 205361747,
+        uin: 0,
+        songmid: song.songmid,
+        filename: `C400${song.songmid}.m4a`,
+        guid: 1392841634
+    }, function (res) {
+        console.log(res)
+    })
 
     dispatch(() => getState().merge({
         current,
