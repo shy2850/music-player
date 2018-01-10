@@ -2,15 +2,15 @@ import * as React from 'react'
 import { render } from 'react-dom'
 import { init } from './store'
 import Progress from './containers/Progress'
-import Panel from './containers/Panel'
+import PlayList from './containers/PlayList'
 
 init({
     progress: 50
 })
 render(
     [
-        <Panel key="1"/>,
-        <Progress key="2"/>
+        <PlayList key="2"/>,
+        <Progress key="3"/>
     ],
     document.getElementById('app')
 )

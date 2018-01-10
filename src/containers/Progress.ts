@@ -4,13 +4,13 @@ import { getState, connect, dispatch } from '../store'
 let i = 0
 const loop = function loop () {
     i = (i + 1) % 100
-    dispatch(state => state.setIn(['progress'], i))
-    setTimeout(loop, 16.67)
+    dispatch((getState) => getState().setIn(['progress'], i))
+    setTimeout(loop, 100)
 }
+setTimeout(loop, 10000)
 
-loop()
-export default connect((state) => {
+export default connect((getState) => {
     return {
-        value: state.getIn(['progress'])
+        value: getState().getIn(['progress'])
     }
 })(Progress)

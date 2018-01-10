@@ -4,3 +4,10 @@ interface ProgressProps {
     max?:number
     onChange?:Function
 }
+
+interface PlayListProps {
+    init:Function
+    list:any[]
+    current:number
+    onChange:Function
+}

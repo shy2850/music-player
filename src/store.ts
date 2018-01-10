@@ -20,7 +20,7 @@ export const compose = (...funcs) => {
 }
 
 export const dispatch = function dispatch (action) {
-    store = action(store)
+    store = action(getState)
     updateQueue.map(f=>f())
 }
 
@@ -42,7 +42,7 @@ export const connect = (mapProps = EF, mapDispatch = EF) => (Component) => class
     forceUpdate
     execProps () {
         const {props} = this
-        const res1 = mapProps(store, props)
+        const res1 = mapProps(getState, props)
         const res2 = mapDispatch(dispatch, res1)
         return { ...props, ...res1, ...res2 }
     }
