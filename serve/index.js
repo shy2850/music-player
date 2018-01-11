@@ -6,6 +6,6 @@ const {
 } = require('f2e-serve')
 const route = new Route()
 
-route.on('lrc', JsonOut(require('./lrc')))
+route.on(/^lrc\/\w+/, JsonOut(require('./lrc')))
 
 module.exports = (...args) => route.execute.apply(route, args)

@@ -12,7 +12,7 @@ export default (props) => {
         seconds = 0
     } = props
 
-    let currentTime = secondsFormat(seconds)
+    let currentTime = secondsFormat(seconds + 1)
     let index = 0
     const list = lyric.split(/[\n\r]/).map((line, i) => {
         let match
@@ -25,7 +25,7 @@ export default (props) => {
     })
 
     return <ul className="lrc-panel" style={{
-        transform: `translateY(${-40 * (index - 5)}px)`
+        transform: `translateY(${-30 * (index - 5)}px)`
     }}>
         {list.map((line, i) => <li key={`${i}`} style={index === i ? { color: '#00d1b2' } : {}}>
             {line}

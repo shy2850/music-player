@@ -5,17 +5,15 @@ import Progress from './containers/Progress'
 import PlayList from './containers/PlayList'
 import LrcPanel from './containers/LrcPanel'
 
-init({
-    progress: 50
-})
+init()
 render(
     [
         <Progress key="1"/>,
         <div className="columns" key="2">
-            <div className="column" style={{ height: 500, overflowY: 'auto' }}>
+            <div className="column" style={{ height: '80vh', overflowY: 'auto' }}>
                 <PlayList/>
             </div>
-            <div className="column has-text-centered" style={{ height: 500, overflow: 'hidden' }}>
+            <div className="column has-text-centered" style={{ height: '80vh', overflow: 'hidden' }}>
                 <LrcPanel/>
             </div>
         </div>

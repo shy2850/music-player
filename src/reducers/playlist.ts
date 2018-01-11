@@ -59,9 +59,15 @@ export const load = () => {
         audio.src = `//dl.stream.qqmusic.qq.com/${filename}?vkey=${vkey}&guid=${y_guid}&uin=0&fromtag=66`
         audio.play()
     })
-    $.get('/lrc', { songmid: song.songmid }, function (data) {
-        // console.log(data.lyric)
-        dispatch(state => state.setIn(['lyric'], data.lyric))
+    $.ajax({
+        url: '/lrc/' + song.songmid + '.json',
+        success: function (data) {
+            // console.log(data.lyric)
+            dispatch(state => state.setIn(['lyric'], data.lyric || '歌词加载失败！'))
+        },
+        error: function () {
+            dispatch(state => state.setIn(['lyric'], '歌词加载失败！'))
+        }
     })
 }
 
