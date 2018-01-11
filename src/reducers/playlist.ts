@@ -60,7 +60,7 @@ export const load = () => {
         audio.play()
     })
     $.ajax({
-        url: '/lrc/' + song.songmid + '.json',
+        url: 'lrc/' + song.songmid + '.json',
         success: function (data) {
             // console.log(data.lyric)
             dispatch(state => state.setIn(['lyric'], data.lyric || '歌词加载失败！'))
