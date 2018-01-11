@@ -30,6 +30,10 @@ audio.addEventListener('timeupdate', function (e) {
     const progress = audio.currentTime * 100 / audio.duration
     updateProgress(progress)
 })
+audio.addEventListener('ended', function (e) {
+    const current = getState().getIn(['current'])
+    changeSong(1 + current)
+})
 
 export const load = () => {
     const state = getState()
@@ -70,13 +74,15 @@ export const changeProgress = (progress) => {
 export const init = () => (dispatch(state => {
     let n = state.merge({
         list: y_playlist,
-        current: Number(y_current) || 0,
+        current: (Number(y_current) || 0) % (y_playlist['size'] || 1),
         progress: Number(y_progress) || 0
     })
     return n
-}), load())
+}), changeSong(Number(y_current) || 0))
 
 export const changeSong = (current) => {
+    const size = getState().getIn(['list']).size
+    current = current % size
     localStorage.setItem(STORE_KEY.CURRENT, current + '')
     localStorage.setItem(STORE_KEY.PROGRESS, '0')
     dispatch((state) => state.merge({
@@ -85,4 +91,3 @@ export const changeSong = (current) => {
     }))
     load()
 }
-

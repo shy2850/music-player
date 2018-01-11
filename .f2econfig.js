@@ -20,5 +20,11 @@ module.exports = {
     buildFilter: pathname => {
         return !pathname || /^(css|src|index)/.test(pathname)
     },
+    bundles: [
+        {
+            test: /src.*?\.tsx?$/,
+            dist: 'src/index.js'
+        }
+    ],
     output: require('path').join(__dirname, './dist')
 }
