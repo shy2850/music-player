@@ -1,0 +1,1 @@
+define("containers/Panel",["require","exports","../components/Panel","../store"],function(e,n,t,o){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),n.default=o.connect()(t.default)});

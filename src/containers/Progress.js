@@ -1,0 +1,1 @@
+define("containers/Progress",["require","exports","../components/Progress","../store","../reducers/playlist"],function(e,r,s,n,o){"use strict";Object.defineProperty(r,"__esModule",{value:!0}),r.default=n.connect(e=>({value:e().getIn(["progress"]),onChange:o.changeProgress}))(s.default)});

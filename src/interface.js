@@ -1,0 +1,1 @@
+define("interface",["require","exports"],function(e,i){"use strict"});

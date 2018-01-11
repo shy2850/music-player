@@ -1,0 +1,1 @@
+define("containers/PlayList",["require","exports","../components/PlayList","../store","../reducers/playlist"],function(e,t,n,r,i){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=r.connect(e=>{const t=e().getIn(["list"]),n=e().getIn(["current"]);return{init:i.init,current:n,list:t,onChange:i.changeSong}})(n.default)});
