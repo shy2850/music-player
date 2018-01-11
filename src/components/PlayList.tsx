@@ -21,7 +21,7 @@ export default class extends React.Component {
             list = []
         } = this.props
         const onChange = this.onChange.bind(this)
-        return <table className="table is-hoverable">
+        return <table className="table is-hoverable playlist">
             <thead>
                 <tr>
                     <th>序号</th>

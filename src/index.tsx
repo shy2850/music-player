@@ -9,8 +9,10 @@ init({
 })
 render(
     [
-        <PlayList key="2"/>,
-        <Progress key="3"/>
+        <Progress key="1"/>,
+        <div key="2" style={{height: 500, overflowY: 'auto'}}>
+            <PlayList/>
+        </div>
     ],
     document.getElementById('app')
 )

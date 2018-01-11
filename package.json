@@ -27,7 +27,8 @@
     "immutable": "^3.8.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "requirejs": "^2.3.5"
+    "requirejs": "^2.3.5",
+    "wfquery": "^0.7.0"
   },
   "devDependencies": {
     "f2e-middle-typescript": "^0.3.3",

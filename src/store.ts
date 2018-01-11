@@ -20,8 +20,11 @@ export const compose = (...funcs) => {
 }
 
 export const dispatch = function dispatch (action) {
-    store = action(getState)
-    updateQueue.map(f=>f())
+    let res = action(store)
+    if (res !== store) {
+        store = res
+        updateQueue.map(f=>f())
+    }
 }
 
 export const isSameObject = (obj1, obj2) => {
