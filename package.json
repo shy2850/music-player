@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "f2e-middle-typescript": "^0.3.3",
+    "f2e-serve": "^0.1.0",
     "f2e-server": "^2.7.4",
     "less": "^2.7.3",
     "typescript": "^2.6.2",

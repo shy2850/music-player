@@ -28,6 +28,7 @@ let audio = new Audio()
 audio.autoplay = true
 audio.addEventListener('timeupdate', function (e) {
     const progress = audio.currentTime * 100 / audio.duration
+    dispatch(state => state.setIn(['seconds'], audio.currentTime))
     updateProgress(progress)
 })
 audio.addEventListener('ended', function (e) {
@@ -55,8 +56,12 @@ export const load = () => {
         guid: y_guid
     }, function (res) {
         const { filename, vkey } = res.data.items[0]
-        audio.src = `http://dl.stream.qqmusic.qq.com/${filename}?vkey=${vkey}&guid=${y_guid}&uin=0&fromtag=66`
+        audio.src = `//dl.stream.qqmusic.qq.com/${filename}?vkey=${vkey}&guid=${y_guid}&uin=0&fromtag=66`
         audio.play()
+    })
+    $.get('/lrc', { songmid: song.songmid }, function (data) {
+        // console.log(data.lyric)
+        dispatch(state => state.setIn(['lyric'], data.lyric))
     })
 }
 

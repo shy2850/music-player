@@ -1,7 +1,8 @@
 const { argv } = process
 const build = argv[argv.length - 1] === 'build'
-
+const onRoute = require('./serve')
 module.exports = {
+    onRoute,
     livereload: !build,
     build,
     useLess: true,
