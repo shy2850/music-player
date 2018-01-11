@@ -1,0 +1,1 @@
+define("containers/LrcPanel",["require","exports","../components/LrcPanel","../store"],function(e,n,t,c){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),n.default=c.connect(e=>{const n=e();return{lyric:n.getIn(["lyric"]),seconds:n.getIn(["seconds"])}})(t.default)});
