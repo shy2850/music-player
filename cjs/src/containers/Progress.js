@@ -1,0 +1,1 @@
+import Progress from"../components/Progress.js";import{connect}from"../store.js";import{changeProgress}from"../reducers/playlist.js";export default connect(r=>({value:r().getIn(["progress"]),onChange:changeProgress}))(Progress);

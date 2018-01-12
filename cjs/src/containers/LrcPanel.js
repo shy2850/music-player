@@ -1,0 +1,1 @@
+import Panel from"../components/LrcPanel.js";import{connect}from"../store.js";export default connect(n=>{const e=n();return{lyric:e.getIn(["lyric"]),seconds:e.getIn(["seconds"])}})(Panel);

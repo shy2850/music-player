@@ -1,0 +1,1 @@
+import PlayList from"../components/PlayList.js";import{connect}from"../store.js";import{init,changeSong}from"../reducers/playlist.js";export default connect(t=>{const n=t().getIn(["list"]),e=t().getIn(["current"]);return{init:init,current:e,list:n,onChange:changeSong}})(PlayList);
