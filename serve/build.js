@@ -6,8 +6,11 @@ const { join } = require('path')
 if (!existsSync(join(__dirname, '../dist'))) {
     mkdirSync(join(__dirname, '../dist'))
 }
-if (!existsSync(join(__dirname, '../dist/lrc'))) {
-    mkdirSync(join(__dirname, '../dist/lrc'))
+if (!existsSync(join(__dirname, '../dist/cjs'))) {
+    mkdirSync(join(__dirname, '../dist/cjs'))
+}
+if (!existsSync(join(__dirname, '../dist/cjs/lrc'))) {
+    mkdirSync(join(__dirname, '../dist/cjs/lrc'))
 }
 
 const list = JSON.parse(
@@ -16,6 +19,6 @@ const list = JSON.parse(
 ).map(({ songmid }) => {
     const url = `lrc/${songmid}.json`
     const data = lrc({ url })
-    writeFileSync(join(__dirname, '../dist/' + url), JSON.stringify(data))
+    writeFileSync(join(__dirname, '../dist/cjs/' + url), JSON.stringify(data))
 })
 

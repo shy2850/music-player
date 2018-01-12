@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 const secondsFormat = seconds => {
     let min = Math.floor(seconds / 60)

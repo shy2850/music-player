@@ -1,11 +1,11 @@
-import { fromJS } from "immutable"
-import * as React from "react"
+import Immutable from "immutable"
+import React from "react"
 
 const EF = (a, b) => ({})
-let store = fromJS({})
+let store = Immutable.fromJS({})
 let updateQueue:Function[] = []
 export const init = (state = {}) => {
-    store = fromJS(state)
+    store = Immutable.fromJS(state)
 }
 export const getState = () => store
 

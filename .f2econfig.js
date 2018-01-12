@@ -1,6 +1,7 @@
 const { argv } = process
 const build = argv[argv.length - 1] === 'build'
 const onRoute = require('./serve')
+const onSet = require('./serve/fixedModuleName')
 module.exports = {
     onRoute,
     livereload: !build,
@@ -13,6 +14,9 @@ module.exports = {
             middleware: 'template',
             test: /index\.html?/
         },
+        (conf) => ({
+            onSet
+        }),
         {
             middleware: 'typescript',
             getModuleId: pathname => pathname.replace(/^src\//, '')
@@ -21,11 +25,5 @@ module.exports = {
     buildFilter: pathname => {
         return !pathname || /^(css|src|index)/.test(pathname)
     },
-    bundles: [
-        {
-            test: /src.*?\.tsx?$/,
-            dist: 'src/index.js'
-        }
-    ],
-    output: require('path').join(__dirname, './dist')
+    output: require('path').join(__dirname, './dist/cjs')
 }

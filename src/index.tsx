@@ -1,12 +1,12 @@
-import * as React from 'react'
-import { render } from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { init } from './store'
 import Progress from './containers/Progress'
 import PlayList from './containers/PlayList'
 import LrcPanel from './containers/LrcPanel'
 
 init()
-render(
+ReactDOM.render(
     [
         <Progress key="1"/>,
         <div className="columns" key="2">

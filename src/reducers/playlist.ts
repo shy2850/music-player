@@ -1,6 +1,6 @@
 import y_playlist_str from './playlistdata'
 import { dispatch, getState } from '../store'
-import * as $ from 'wfquery'
+import $ from 'wfquery'
 
 export const STORE_KEY = {
     LIST: 'y_playlist',
