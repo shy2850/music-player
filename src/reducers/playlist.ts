@@ -7,11 +7,15 @@ export const STORE_KEY = {
     CURRENT: 'y_current',
     PROGRESS: 'y_progress',
     GUID: 'pgv_pvid',
-    CID: 'cid'
+    CID: 'cid',
+    WAY: 'play_way',
+    STATUS: 'play_status'
 }
 let y_playlist = localStorage.getItem(STORE_KEY.LIST)
 let y_current = localStorage.getItem(STORE_KEY.CURRENT)
 let y_progress = localStorage.getItem(STORE_KEY.PROGRESS)
+let y_way = localStorage.getItem(STORE_KEY.WAY) || 0
+let y_status = localStorage.getItem(STORE_KEY.STATUS) || 0
 let y_guid = localStorage.getItem(STORE_KEY.GUID) || 1392841634
 let y_cid = localStorage.getItem(STORE_KEY.CID) || 205361747
 try {
@@ -25,20 +29,41 @@ if (!y_playlist) {
 }
 
 let audio = new Audio()
-audio.autoplay = true
+audio.autoplay = false
 audio.addEventListener('timeupdate', function (e) {
     const progress = audio.currentTime * 100 / audio.duration
     dispatch(state => state.setIn(['seconds'], audio.currentTime))
     updateProgress(progress)
 })
-audio.addEventListener('ended', function (e) {
-    const current = getState().getIn(['current'])
-    changeSong(1 + current)
-})
+export const next = () => {
+    const state = getState()
+    const current = state.getIn(['current'])
+    const way = state.getIn(['way'])
+    const length = state.getIn(['list']).size
+    switch (way) {
+        case 0:
+            changeSong(1 + current)
+            break
+        case 1:
+            changeSong(length + current - 1)
+            break
+        case 2:
+            changeSong(Math.random() * length | 0)
+            break
+        case 3:
+            changeSong(current)
+            break
+    }
+}
+audio.addEventListener('ended', next)
+
 
 export const load = () => {
     const state = getState()
     const song = state.getIn(['list', state.get('current')]).toJS()
+    const progress = state.getIn(['progress'])
+    const status = state.getIn(['status'])
+    document.title = song.songname
     $.jsonp('https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg', {
         g_tk: 5738,
         loginUin: 0,
@@ -57,7 +82,14 @@ export const load = () => {
     }, function (res) {
         const { filename, vkey } = res.data.items[0]
         audio.src = `//dl.stream.qqmusic.qq.com/${filename}?vkey=${vkey}&guid=${y_guid}&uin=0&fromtag=66`
-        audio.play()
+        setTimeout(function() {
+            if (progress) {
+                changeProgress(progress)
+            }
+            if (!status) {
+                audio.play()
+            }
+        }, 500);
     })
     $.ajax({
         url: 'lrc/' + song.songmid + '.json',
@@ -82,11 +114,34 @@ export const changeProgress = (progress) => {
     }
 }
 
+export const togglePlay = () => {
+    let status
+    if (audio.paused) {
+        audio.play()
+        status = 0
+    } else {
+        audio.pause()
+        status = 1
+    }
+    dispatch(state => state.setIn(['status'], status))
+    localStorage.setItem(STORE_KEY.STATUS, status + '')
+}
+
+export const changeWay = () => {
+    let way = Number(getState().getIn(['way'])) || 0
+    way = (way + 1) % 4
+    dispatch(state => state.setIn(['way'], way))
+    localStorage.setItem(STORE_KEY.WAY, way + '')
+    
+}
+
 export const init = () => (dispatch(state => {
     let n = state.merge({
         list: y_playlist,
         current: (Number(y_current) || 0) % (y_playlist['size'] || 1),
-        progress: Number(y_progress) || 0
+        progress: Number(y_progress) || 0,
+        way: Number(y_way),
+        status: Number(y_status)
     })
     return n
 }), changeSong(Number(y_current) || 0))

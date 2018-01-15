@@ -7,6 +7,7 @@ module.exports = {
     build,
     useLess: true,
     gzip: true,
+    getModuleId: pathname => pathname.replace(/^src\//, ''),
     include: /__include\(["'\s]*([^"'\s]+)["'\s]*(?:,["'\s]*([^"'\s]+)["'\s]*)?\)/g,
     middlewares: [
         {
@@ -24,6 +25,10 @@ module.exports = {
     bundles: [
         {
             test: /src.*?\.tsx?$/,
+            dist: 'src/index.js'
+        },
+        {
+            test: /src\/(immutable|react-dom|react|wfquery)\.js$/,
             dist: 'src/index.js'
         }
     ],
