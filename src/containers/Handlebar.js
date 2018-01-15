@@ -1,0 +1,1 @@
+define("containers/Handlebar",["require","exports","../components/Handlebar","../store","../reducers/playlist"],function(e,t,n,a,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=a.connect(e=>{const t=e();return{way:t.getIn(["way"]),status:t.getIn(["status"]),togglePlay:r.togglePlay,changeWay:r.changeWay,next:r.next}})(n.default)});
